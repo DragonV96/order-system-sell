@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 表名：order_detail
- * 订单详情表
+ * @author : glw
+ * @date : 2019/12/25
+ * @time : 21:07
+ * @Description : 表名：order_detail 订单详情表
 */
 @Data
 @Entity

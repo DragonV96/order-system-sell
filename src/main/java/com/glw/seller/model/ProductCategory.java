@@ -8,8 +8,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 表名：product_category
- * 类目表
+ * @author : glw
+ * @date : 2019/12/25
+ * @time : 21:07
+ * @Description : 表名：product_category 类目表
 */
 @Data
 @Entity
