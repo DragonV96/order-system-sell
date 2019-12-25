@@ -3,13 +3,22 @@ package com.glw.seller.mapper;
 import com.glw.seller.model.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
-* 通用 Mapper 代码生成器
-*
-* @author mapper-generator
+ * @author : glw
+ * @date : 2019/12/25
+ * @time : 21:07
+ * @Description : 商品类目DAO
 */
 public interface ProductCategoryDao extends JpaRepository<ProductCategory, Integer> {
 
+    /**
+     * 根据类目编号集合查询类目集合
+     * @param categoryTypeList
+     * @return
+     */
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 }
 
 

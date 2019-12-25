@@ -4,8 +4,10 @@ import com.glw.seller.model.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
-* 通用 Mapper 代码生成器
-* @author glw
+ * @author : glw
+ * @date : 2019/12/25
+ * @time : 21:07
+ * @Description : 订单详情DAO
 */
 public interface OrderDetailDao extends JpaRepository<OrderDetail, Long> {
 

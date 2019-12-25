@@ -4,3 +4,7 @@ server:
 spring:
   profiles:
     active: dev
+
+id:
+  dataCenterId: 1
+  machineId: 1
