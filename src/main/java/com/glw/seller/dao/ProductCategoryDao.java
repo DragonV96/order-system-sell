@@ -1,4 +1,4 @@
-package com.glw.seller.mapper;
+package com.glw.seller.dao;
 
 import com.glw.seller.model.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +14,7 @@ import java.util.List;
 public interface ProductCategoryDao extends JpaRepository<ProductCategory, Integer> {
 
     /**
-     * 根据类目编号集合查询类目集合
+     * 根据类目id集合查询类目集合
      * @param categoryTypeList
      * @return
      */

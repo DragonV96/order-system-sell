@@ -1,4 +1,4 @@
-package com.glw.seller.mapper;
+package com.glw.seller.dao;
 
 import com.glw.seller.model.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;

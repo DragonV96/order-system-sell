@@ -1,7 +1,9 @@
-package com.glw.seller.mapper;
+package com.glw.seller.dao;
 
 import com.glw.seller.model.ProductInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * @author : glw
@@ -11,6 +13,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 */
 public interface ProductInfoDao extends JpaRepository<ProductInfo, Long> {
 
+    /**
+     * 根据商品状态码查询商品列表
+     * @param productStatus
+     * @return
+     */
+    List<ProductInfo> findByProductStatus(Integer productStatus);
 }
 
 
