@@ -58,6 +58,12 @@ public class ProductInfo {
     private String productIcon;
 
     /**
+     * 商品状态：0正常，1下架
+     */
+    @Column(name = "product_status")
+    private String productStatus;
+
+    /**
      * 类目编号
      */
     @Column(name = "category_type")

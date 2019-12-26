@@ -15,8 +15,14 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "id")
 public class IdConfig {
 
+    /**
+     * 数据中心标识（数据中心标识和机器标识的组合必须唯一）
+     */
     public int dataCenterId;
 
+    /**
+     * 机器标识（数据中心标识和机器标识的组合必须唯一）
+     */
     public int machineId;
 
 }

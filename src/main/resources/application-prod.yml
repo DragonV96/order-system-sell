@@ -7,7 +7,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    jdbc-url: jdbc:mysql://${host.local}:3306/order_sys_seller?zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://${host.local}:3306/order_sys_seller?zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
   jpa:

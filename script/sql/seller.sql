@@ -10,7 +10,8 @@ CREATE TABLE `product_info`(
     `product_price` decimal(8,2) NOT NULL COMMENT '单价',
     `product_stock` int(11) NOT NULL COMMENT '库存',
     `product_description` varchar(64) COMMENT '描述',
-    `product_icon` varchar(512) COMMENT '小图',
+    `product_icon` varchar(512) DEFAULT NULL COMMENT '小图',
+    `product_status` tinyint(3) DEFAULT '0' COMMENT '商品状态：0正常，1下架',
     `category_type` int(11) NOT NULL COMMENT '类目编号',
     `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
     `update_time` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
@@ -28,6 +29,9 @@ CREATE TABLE `product_category`(
     PRIMARY KEY (`category_id`),
     UNIQUE KEY `u_category_type` (`category_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '类目表';
+
+INSERT INTO `order_sys_seller`.`product_category` (`category_id`, `category_name`, `category_type`, `create_time`, `update_time`) VALUES ('1', '优惠打折', '1001', '2019-12-26 01:51:34', '2019-12-26 01:51:34');
+INSERT INTO `order_sys_seller`.`product_category` (`category_id`, `category_name`, `category_type`, `create_time`, `update_time`) VALUES ('2', '换季打折', '1005', '2019-12-26 01:51:48', '2019-12-26 01:51:48');
 
 
 DROP TABLE IF EXISTS `order_master`;
