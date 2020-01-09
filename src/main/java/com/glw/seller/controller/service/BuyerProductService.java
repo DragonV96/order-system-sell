@@ -2,10 +2,13 @@ package com.glw.seller.controller.service;
 
 import com.glw.seller.model.ProductCategory;
 import com.glw.seller.model.ProductInfo;
+import com.glw.seller.model.RateDetail;
 import com.glw.seller.model.vo.ProductInfoVO;
 import com.glw.seller.model.vo.ProductVO;
+import com.glw.seller.model.vo.RatingVO;
 import com.glw.seller.service.ProductCategoryService;
 import com.glw.seller.service.ProductInfoService;
+import com.glw.seller.service.RateDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,9 @@ public class BuyerProductService {
     @Autowired
     private ProductInfoService productInfoService;
 
+    @Autowired
+    private RateDetailService rateDetailService;
+
     /**
      * 获取商品列表
      * @return
@@ -44,16 +50,36 @@ public class BuyerProductService {
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             List<ProductInfo> productInfoList = productInfoService.findAllByCategoryType(categoryType);
             for (ProductInfo productInfo : productInfoList) {
+                Long productId = productInfo.getProductId();
                 ProductInfoVO productInfoVO = new ProductInfoVO();
-                productInfoVO.setProductId(productInfo.getProductId());
+                productInfoVO.setProductId(productId);
                 productInfoVO.setProductName(productInfo.getProductName());
-                productInfoVO.setProductId(productInfo.getProductId());
-                productInfoVO.setProductId(productInfo.getProductId());
-                productInfoVO.setProductId(productInfo.getProductId());
-                productInfoVO.setProductId(productInfo.getProductId());
-                productInfoVO.setProductId(productInfo.getProductId());
-                productInfoVO.setProductId(productInfo.getProductId());
+                productInfoVO.setDiscountPrice(productInfo.getDiscountPrice());
+                productInfoVO.setProductPrice(productInfo.getProductPrice());
+                productInfoVO.setProductDescription(productInfo.getProductDescription());
+                productInfoVO.setSellCount(0);  // TODO  销量、评论
+                productInfoVO.setRating(0);
+                productInfoVO.setProductInfo(productInfo.getProductInfo());
+                productInfoVO.setProductIcon(productInfo.getProductIcon());
+                productInfoVO.setProductImage(productInfo.getProductImage());
+
+                List<RatingVO> ratingVOList = new ArrayList<>();
+                List<RateDetail> rateDetailList = rateDetailService.findAllByProductId(productId);
+                for (RateDetail rateDetail : rateDetailList) {
+                    RatingVO ratingVO = new RatingVO();
+                    ratingVO.setUsername(rateDetail.getUsername());
+                    ratingVO.setRateTime(rateDetail.getCreateTime().getTime());
+                    ratingVO.setRateType(rateDetail.getRateType());
+                    ratingVO.setText(rateDetail.getText());
+                    ratingVO.setAvatar(rateDetail.getAvatar());
+
+                    ratingVOList.add(ratingVO);
+                }
+                productInfoVO.setRatingList(ratingVOList);
+                productInfoVOList.add(productInfoVO);
             }
+            productVO.setProductInfoVOList(productInfoVOList);
+            productCategoryList.add(productCategory);
         }
 
         return productVOList;

@@ -39,6 +39,12 @@ public class RateDetail {
     private Long productId;
 
     /**
+     * 用户名
+     */
+    @Column(name = "username")
+    private String username;
+
+    /**
      * 评价类型
      */
     @Column(name = "rate_type")

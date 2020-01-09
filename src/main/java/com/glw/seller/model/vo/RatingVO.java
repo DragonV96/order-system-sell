@@ -21,7 +21,7 @@ public class RatingVO {
 
     @JsonProperty("rateTime")
     @ApiModelProperty(value = "评价时间")
-    private String rateTime;
+    private Long rateTime;
 
     @JsonProperty("rateType")
     @ApiModelProperty(value = "评价类型")

@@ -77,11 +77,12 @@ CREATE TABLE `rate_detail`(
     `rate_id` bigint(20) NOT NULL COMMENT '评价id',
     `order_id` bigint(20) NOT NULL COMMENT '订单id',
     `product_id` bigint(20) NOT NULL COMMENT '商品id',
+    `username` varchar(32) NOT NULL COMMENT '用户名',
     `rate_type` int(11) NOT NULL COMMENT '评价类型',
     `text` varchar(512) NOT NULL DEFAULT '默认评价。' COMMENT '评价内容',
     `avatar` varchar(256) NOT NULL COMMENT '评价图片地址',
     `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
     `update_time` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
     PRIMARY KEY (`rate_id`),
-    KEY `idx_order_id` (`order_id`)
+    KEY `idx_product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '订单评价表';
