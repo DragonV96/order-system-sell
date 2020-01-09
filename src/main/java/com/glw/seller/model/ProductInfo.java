@@ -40,6 +40,12 @@ public class ProductInfo {
     private BigDecimal productPrice;
 
     /**
+     * 折扣单价
+     */
+    @Column(name = "discount_price")
+    private BigDecimal discountPrice;
+
+    /**
      * 库存
      */
     @Column(name = "product_stock")
@@ -52,16 +58,28 @@ public class ProductInfo {
     private String productDescription;
 
     /**
-     * 小图
+     * 商品信息介绍
+     */
+    @Column(name = "product_info")
+    private String productInfo;
+
+    /**
+     * 小图标
      */
     @Column(name = "product_icon")
     private String productIcon;
 
     /**
+     * 图片地址
+     */
+    @Column(name = "product_image")
+    private String productImage;
+
+    /**
      * 商品状态：0正常，1下架
      */
     @Column(name = "product_status")
-    private String productStatus;
+    private Byte productStatus;
 
     /**
      * 类目编号

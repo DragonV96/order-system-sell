@@ -35,6 +35,13 @@ public interface ProductInfoService {
     Page<ProductInfo> findAll(Pageable pageable);
 
     /**
+     * 根据类目编号查询商品
+     * @param categoryType
+     * @return
+     */
+    List<ProductInfo> findAllByCategoryType(Integer categoryType);
+
+    /**
      * 插入或更新
      * @param productInfo
      * @return

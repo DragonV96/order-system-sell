@@ -8,14 +8,18 @@ CREATE TABLE `product_info`(
     `product_id` bigint(20) NOT NULL COMMENT '商品id',
     `product_name` varchar(64) NOT NULL COMMENT '商品名称',
     `product_price` decimal(8,2) NOT NULL COMMENT '单价',
+    `discount_price` decimal(8,2) NOT NULL COMMENT '折扣单价',
     `product_stock` int(11) NOT NULL COMMENT '库存',
     `product_description` varchar(64) COMMENT '描述',
-    `product_icon` varchar(512) DEFAULT NULL COMMENT '小图',
+    `product_info` varchar(256) COMMENT '商品信息介绍',
+    `product_icon` varchar(512) DEFAULT NULL COMMENT '小图标',
+    `product_image` varchar(512) DEFAULT NULL COMMENT '图片地址',
     `product_status` tinyint(3) DEFAULT '0' COMMENT '商品状态：0正常，1下架',
     `category_type` int(11) NOT NULL COMMENT '类目编号',
     `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
     `update_time` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
-    PRIMARY KEY (`product_id`)
+    PRIMARY KEY (`product_id`),
+    KEY `idx_category_type` (`category_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '商品表';
 
 
@@ -66,3 +70,18 @@ CREATE TABLE `order_detail`(
     PRIMARY KEY (`detail_id`),
     KEY `idx_order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '订单详情表';
+
+
+DROP TABLE IF EXISTS `rate_detail`;
+CREATE TABLE `rate_detail`(
+    `rate_id` bigint(20) NOT NULL COMMENT '评价id',
+    `order_id` bigint(20) NOT NULL COMMENT '订单id',
+    `product_id` bigint(20) NOT NULL COMMENT '商品id',
+    `rate_type` int(11) NOT NULL COMMENT '评价类型',
+    `text` varchar(512) NOT NULL DEFAULT '默认评价。' COMMENT '评价内容',
+    `avatar` varchar(256) NOT NULL COMMENT '评价图片地址',
+    `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+    `update_time` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
+    PRIMARY KEY (`rate_id`),
+    KEY `idx_order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '订单评价表';

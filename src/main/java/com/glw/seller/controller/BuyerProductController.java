@@ -1,12 +1,16 @@
 package com.glw.seller.controller;
 
+import com.glw.seller.controller.service.BuyerProductService;
 import com.glw.seller.model.vo.ProductVO;
 import com.glw.seller.model.vo.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author : glw
@@ -19,9 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "买家商品接口")
 public class BuyerProductController {
 
+    @Autowired
+    private BuyerProductService buyerProductService;
+
     @GetMapping("/list")
     @ApiOperation(value = "获取商品列表", notes = "获取商品列表")
-    public ResultData<ProductVO> list(ProductVO productVO) {
-        return ResultData.success(productVO);
+    public ResultData<List<ProductVO>> list() {
+        List<ProductVO> productVOList = buyerProductService.getList();
+        return ResultData.success(productVOList);
     }
 }

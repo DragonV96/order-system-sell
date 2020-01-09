@@ -19,6 +19,14 @@ public interface ProductInfoDao extends JpaRepository<ProductInfo, Long> {
      * @return
      */
     List<ProductInfo> findByProductStatus(Integer productStatus);
+
+
+    /**
+     * 根据商品类目查询商品列表
+     * @param categoryType
+     * @return
+     */
+    List<ProductInfo> findAllByCategoryType(Integer categoryType);
 }
 
 

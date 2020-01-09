@@ -61,6 +61,17 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return productInfoPage;
     }
 
+    @Override
+    public List<ProductInfo> findAllByCategoryType(Integer categoryType) {
+        List<ProductInfo> productInfoList = null;
+        try {
+            productInfoList = productInfoDao.findAllByCategoryType(categoryType);
+        } catch (Exception e) {
+            log.error("[findAllByCategoryType] - ProductInfo searched failed, the reason was : {}", e.getMessage());
+        }
+        return productInfoList;
+    }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ProductInfo save(ProductInfo productInfo) {
