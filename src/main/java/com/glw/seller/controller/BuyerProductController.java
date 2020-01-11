@@ -6,9 +6,7 @@ import com.glw.seller.model.vo.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +29,12 @@ public class BuyerProductController {
     public ResultData<List<ProductVO>> list() {
         List<ProductVO> productVOList = buyerProductService.getList();
         return ResultData.success(productVOList);
+    }
+
+    @PostMapping("/fake/add")
+    @ApiOperation(value = "添加商品模拟数据", notes = "添加商品模拟数据")
+    public ResultData addFake(@RequestBody ProductVO productVO) {
+        buyerProductService.addFake(productVO);
+        return ResultData.success();
     }
 }

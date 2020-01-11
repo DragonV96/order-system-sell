@@ -90,4 +90,50 @@ public class BuyerProductService {
 
         return productVOList;
     }
+
+    /**
+     * 添加商品
+     * @param productVO
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void addFake(ProductVO productVO) {
+        ProductCategory productCategory = new ProductCategory();
+        Integer categoryType = productVO.getType();
+        productCategory.setCategoryName(productVO.getName());
+        productCategory.setCategoryType(categoryType);
+
+        productCategoryService.save(productCategory);
+        List<ProductInfoVO> productInfoVOList = productVO.getFoods();
+        for (ProductInfoVO productInfoVO : productInfoVOList) {
+            ProductInfo productInfo = new ProductInfo();
+            long productId = idGenerator.nextId();
+            productInfo.setProductId(productId);
+            productInfo.setProductName(productInfoVO.getName());
+            productInfo.setProductPrice(productInfoVO.getOldPrice());
+            productInfo.setDiscountPrice(productInfoVO.getPrice());
+            productInfo.setProductStock(9999);
+            productInfo.setProductDescription(productInfoVO.getDescription());
+            productInfo.setProductInfo(productInfoVO.getInfo());
+            productInfo.setProductIcon(productInfoVO.getIcon());
+            productInfo.setProductImage(productInfoVO.getImage());
+            productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+            productInfo.setCategoryType(categoryType);
+
+            productInfoService.save(productInfo);
+            List<RatingVO> ratingList = productInfoVO.getRatings();
+            for (RatingVO ratingVO : ratingList) {
+                RateDetail rateDetail = new RateDetail();
+                rateDetail.setRateId(idGenerator.nextId());
+                rateDetail.setProductId(productId);
+                rateDetail.setOrderId(idGenerator.nextId());
+                rateDetail.setProductId(productId);
+                rateDetail.setUsername(ratingVO.getUsername());
+                rateDetail.setRateType(ratingVO.getRateType());
+                rateDetail.setText(ratingVO.getText());
+                rateDetail.setAvatar(ratingVO.getAvatar());
+
+                rateDetailService.save(rateDetail);
+            }
+        }
+    }
 }
