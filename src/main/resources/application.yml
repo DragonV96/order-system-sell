@@ -10,3 +10,8 @@ spring:
 id:
   dataCenterId: 1
   machineId: 1
+
+xss:
+  enabled: true
+  excludes: /help/*
+  urlPatterns: /seller/*,/user/*
