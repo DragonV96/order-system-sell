@@ -1,5 +1,7 @@
 package com.glw.seller.controller.service;
 
+import com.glw.seller.common.enums.ProductStatusEnum;
+import com.glw.seller.common.snowflake.IdGenerator;
 import com.glw.seller.model.ProductCategory;
 import com.glw.seller.model.ProductInfo;
 import com.glw.seller.model.RateDetail;
@@ -11,6 +13,7 @@ import com.glw.seller.service.ProductInfoService;
 import com.glw.seller.service.RateDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,9 @@ public class BuyerProductService {
     @Autowired
     private RateDetailService rateDetailService;
 
+    @Autowired
+    private IdGenerator idGenerator;
+
     /**
      * 获取商品列表
      * @return
@@ -44,24 +50,24 @@ public class BuyerProductService {
         for (ProductCategory productCategory : productCategoryList) {
             ProductVO productVO = new ProductVO();
             Integer categoryType = productCategory.getCategoryType();
-            productVO.setCategoryName(productCategory.getCategoryName());
-            productVO.setCategoryType(categoryType);
+            productVO.setName(productCategory.getCategoryName());
+            productVO.setType(categoryType);
 
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             List<ProductInfo> productInfoList = productInfoService.findAllByCategoryType(categoryType);
             for (ProductInfo productInfo : productInfoList) {
                 Long productId = productInfo.getProductId();
                 ProductInfoVO productInfoVO = new ProductInfoVO();
-                productInfoVO.setProductId(productId);
-                productInfoVO.setProductName(productInfo.getProductName());
-                productInfoVO.setDiscountPrice(productInfo.getDiscountPrice());
-                productInfoVO.setProductPrice(productInfo.getProductPrice());
-                productInfoVO.setProductDescription(productInfo.getProductDescription());
+                productInfoVO.setId(productId);
+                productInfoVO.setName(productInfo.getProductName());
+                productInfoVO.setPrice(productInfo.getDiscountPrice());
+                productInfoVO.setOldPrice(productInfo.getProductPrice());
+                productInfoVO.setDescription(productInfo.getProductDescription());
                 productInfoVO.setSellCount(0);  // TODO  销量、评论
                 productInfoVO.setRating(0);
-                productInfoVO.setProductInfo(productInfo.getProductInfo());
-                productInfoVO.setProductIcon(productInfo.getProductIcon());
-                productInfoVO.setProductImage(productInfo.getProductImage());
+                productInfoVO.setInfo(productInfo.getProductInfo());
+                productInfoVO.setIcon(productInfo.getProductIcon());
+                productInfoVO.setImage(productInfo.getProductImage());
 
                 List<RatingVO> ratingVOList = new ArrayList<>();
                 List<RateDetail> rateDetailList = rateDetailService.findAllByProductId(productId);
@@ -75,11 +81,11 @@ public class BuyerProductService {
 
                     ratingVOList.add(ratingVO);
                 }
-                productInfoVO.setRatingList(ratingVOList);
+                productInfoVO.setRatings(ratingVOList);
                 productInfoVOList.add(productInfoVO);
             }
-            productVO.setProductInfoVOList(productInfoVOList);
-            productCategoryList.add(productCategory);
+            productVO.setFoods(productInfoVOList);
+            productVOList.add(productVO);
         }
 
         return productVOList;

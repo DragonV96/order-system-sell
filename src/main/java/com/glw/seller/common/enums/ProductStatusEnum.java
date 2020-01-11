@@ -10,13 +10,13 @@ import lombok.Getter;
  */
 @Getter
 public enum ProductStatusEnum {
-    UP(0, "上架"),
-    DOWN(1, "下架");
+    UP((byte)0, "上架"),
+    DOWN((byte)1, "下架");
 
-    private Integer code;
+    private Byte code;
     private String desc;
 
-    ProductStatusEnum(Integer code, String desc) {
+    ProductStatusEnum(Byte code, String desc) {
         this.code = code;
         this.desc = desc;
     }

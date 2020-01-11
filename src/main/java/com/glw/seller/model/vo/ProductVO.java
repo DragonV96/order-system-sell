@@ -17,15 +17,12 @@ import java.util.List;
 @ApiModel(value = "商品(包含类目)")
 public class ProductVO {
 
-    @JsonProperty("name")
     @ApiModelProperty(value = "类目名称")
-    private String categoryName;
+    private String name;
 
-    @JsonProperty("type")
     @ApiModelProperty(value = "类目编号")
-    private Integer categoryType;
+    private Integer type;
 
-    @JsonProperty("foods")
     @ApiModelProperty(value = "商品详情对象列表")
-    private List<ProductInfoVO> productInfoVOList;
+    private List<ProductInfoVO> foods;
 }
